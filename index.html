@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問題＆答え単語帳</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #card { border: 2px solid #333; padding: 20px; width: 300px; margin: 20px auto; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>問題＆答え単語帳</h1>
+    <div id="card" onclick="toggleAnswer()">クリックして問題を表示</div>
+    <button onclick="nextQuestion()">次の問題</button>
+    
+    <script>
+        const flashcards = [
+            { question: "コミュニケーションの基本となるスキルは？", answer: "傾聴" },
+            { question: "相手が話しやすくなるためのテクニックは？", answer: "オープンクエスチョン" },
+            { question: "人の感情を理解するために重要なスキルは？", answer: "共感力" }
+        ];
+
+        let currentIndex = -1;
+        let showAnswer = false;
+
+        function nextQuestion() {
+            currentIndex = Math.floor(Math.random() * flashcards.length);
+            document.getElementById('card').textContent = flashcards[currentIndex].question;
+            showAnswer = false;
+        }
+
+        function toggleAnswer() {
+            if (currentIndex >= 0) {
+                document.getElementById('card').textContent = showAnswer 
+                    ? flashcards[currentIndex].question 
+                    : flashcards[currentIndex].answer;
+                showAnswer = !showAnswer;
+            }
+        }
+    </script>
+</body>
+</html>
