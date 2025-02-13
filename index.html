@@ -47,15 +47,28 @@
         const flashcards = [
             { question: "コミュニケーションの基本となるスキルは？", answer: "傾聴" },
             { question: "相手が話しやすくなるためのテクニックは？", answer: "オープンクエスチョン" },
-        　  { question: "テストだよ？", answer: "回答だよ" },
-            { question: "人の感情を理解するために重要なスキルは？", answer: "共感力" }
+            { question: "人の感情を理解するために重要なスキルは？", answer: "共感力" },
+            { question: "会話の流れをスムーズにするための方法は？", answer: "相槌" },
+            { question: "相手が本音を話しやすくするために大切なことは？", answer: "安心感" },
+            { question: "相手の話を深く理解するために必要なことは？", answer: "質問力" },
+            { question: "会話のキャッチボールを成立させるために必要なことは？", answer: "レスポンスの速さ" },
+            { question: "人間関係を円滑にするための基本的な心構えは？", answer: "敬意" },
+            { question: "話を聞く際に相手の気持ちに寄り添うことを何という？", answer: "共感的傾聴" },
+            { question: "相手に安心感を与えるために重要な要素は？", answer: "アイコンタクト" }
         ];
 
         let currentIndex = -1;
+        let previousIndex = -1;
         let showAnswer = false;
 
         function nextQuestion() {
-            currentIndex = Math.floor(Math.random() * flashcards.length);
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * flashcards.length);
+            } while (newIndex === previousIndex && flashcards.length > 1);
+            
+            previousIndex = newIndex;
+            currentIndex = newIndex;
             document.getElementById('card').textContent = flashcards[currentIndex].question;
             showAnswer = false;
         }
