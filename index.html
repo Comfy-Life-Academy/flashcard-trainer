@@ -24,7 +24,7 @@
             font-size: 1.2em;
         }
         button {
-            margin-top: 20px;
+            margin-top: 10px;
             padding: 10px 20px;
             font-size: 1.2em;
             border: none;
@@ -40,6 +40,10 @@
 </head>
 <body>
     <h1>問題＆答え単語帳</h1>
+    <div>
+        <button onclick="setMode('sequential')">順番モード</button>
+        <button onclick="setMode('random')">ランダムモード</button>
+    </div>
     <div id="card" onclick="toggleAnswer()">クリックして問題を表示</div>
     <button onclick="nextQuestion()">次の問題</button>
 
@@ -57,18 +61,28 @@
             { question: "相手に安心感を与えるために重要な要素は？", answer: "アイコンタクト" }
         ];
 
-        let currentIndex = -1;
+        let currentIndex = 0;
         let previousIndex = -1;
         let showAnswer = false;
+        let mode = 'sequential'; // デフォルトは順番モード
+
+        function setMode(selectedMode) {
+            mode = selectedMode;
+            currentIndex = 0;
+            alert(mode === 'sequential' ? '順番モードに切り替えました！' : 'ランダムモードに切り替えました！');
+        }
 
         function nextQuestion() {
-            let newIndex;
-            do {
-                newIndex = Math.floor(Math.random() * flashcards.length);
-            } while (newIndex === previousIndex && flashcards.length > 1);
-            
-            previousIndex = newIndex;
-            currentIndex = newIndex;
+            if (mode === 'random') {
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * flashcards.length);
+                } while (newIndex === previousIndex && flashcards.length > 1);
+                previousIndex = newIndex;
+                currentIndex = newIndex;
+            } else {
+                currentIndex = (currentIndex + 1) % flashcards.length;
+            }
             document.getElementById('card').textContent = flashcards[currentIndex].question;
             showAnswer = false;
         }
