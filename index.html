@@ -71,10 +71,11 @@
         .mode-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 10px;
             margin-top: 10px;
             font-size: 0.9em;
             white-space: nowrap;
+            justify-content: center;
         }
         .mode-container button, .hint-container button {
             border: none;
@@ -82,9 +83,13 @@
             color: #007BFF;
             font-size: 1em;
             cursor: pointer;
+            padding: 5px 15px;
+            transition: background-color 0.3s, color 0.3s;
         }
         .mode-container button:hover, .hint-container button:hover {
-            text-decoration: underline;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
         }
         button {
             padding: 10px 20px;
