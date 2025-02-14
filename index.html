@@ -84,10 +84,12 @@
             font-size: 1em;
             cursor: pointer;
             padding: 5px 15px;
-            transition: color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
         .mode-container button:hover, .hint-container button:hover {
-            color: #0056b3;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
         }
         button {
             padding: 10px 20px;
@@ -146,33 +148,6 @@
             mode = selectedMode;
             currentIndex = -1;
             alert(mode === 'sequential' ? '順番モードに切り替えました！' : 'ランダムモードに切り替えました！');
-        }
-
-        function nextQuestion() {
-            previousIndex = currentIndex;
-            if (mode === 'random') {
-                let newIndex;
-                do {
-                    newIndex = Math.floor(Math.random() * flashcards.length);
-                } while (newIndex === previousIndex && flashcards.length > 1);
-                currentIndex = newIndex;
-            } else {
-                currentIndex = (currentIndex + 1) % flashcards.length;
-            }
-            document.getElementById('card-front').textContent = flashcards[currentIndex].question;
-            document.getElementById('card-back').textContent = flashcards[currentIndex].answer;
-            document.getElementById('hint').style.display = 'none';
-            document.getElementById('hint').textContent = '';
-            resetFlip();
-        }
-
-        function toggleAnswer() {
-            const card = document.getElementById('card');
-            card.classList.toggle('flipped');
-        }
-
-        function resetFlip() {
-            document.getElementById('card').classList.remove('flipped');
         }
 
         function toggleHint() {
