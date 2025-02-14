@@ -29,7 +29,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 1.2em;
+            font-size: 1.1em;
             cursor: pointer;
             position: relative;
             transform-style: preserve-3d;
@@ -84,12 +84,10 @@
             font-size: 1em;
             cursor: pointer;
             padding: 5px 15px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: color 0.3s;
         }
         .mode-container button:hover, .hint-container button:hover {
-            background-color: #007BFF;
-            color: white;
-            border-radius: 5px;
+            color: #0056b3;
         }
         button {
             padding: 10px 20px;
@@ -117,7 +115,7 @@
     </div>
     <div class="card-container" onclick="toggleAnswer()">
         <div class="card" id="card">
-            <div class="card-front" id="card-front">次の問題をクリックで開始
+            <div class="card-front" id="card-front" style="font-size: 0.9em;">次の問題をクリックで開始
                 <div class="instruction"> <br> 問題をクリックで解答または回答例が表示されます </div>
             </div>
             <div class="card-back" id="card-back">答え</div>
@@ -128,7 +126,7 @@
         <button onclick="nextQuestion()">次の問題</button>
     </div>
     <div class="hint-container">
-        <button onclick="showHint()">ヒント</button>
+        <button onclick="toggleHint()">ヒント</button>
     </div>
     <p id="hint" style="display: none;"></p>
     
@@ -177,12 +175,9 @@
             document.getElementById('card').classList.remove('flipped');
         }
 
-        function showHint() {
-            if (currentIndex >= 0) {
-                const hintElement = document.getElementById('hint');
-                hintElement.textContent = flashcards[currentIndex].hints.join(" / ");
-                hintElement.style.display = 'block';
-            }
+        function toggleHint() {
+            const hintElement = document.getElementById('hint');
+            hintElement.style.display = hintElement.style.display === 'none' ? 'block' : 'none';
         }
     </script>
 </body>
