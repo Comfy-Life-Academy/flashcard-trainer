@@ -117,9 +117,7 @@
     </div>
     <div class="card-container" onclick="toggleAnswer()">
         <div class="card" id="card">
-            <div class="card-front" id="card-front" style="font-size: 0.9em;">次の問題をクリックで開始
-                <div class="instruction"> <br> 問題をクリックで解答または回答例が表示されます </div>
-            </div>
+            <div class="card-front" id="card-front">次の問題をクリックで開始</div>
             <div class="card-back" id="card-back">答え</div>
         </div>
     </div>
@@ -140,14 +138,24 @@
         ];
 
         let currentIndex = -1;
-        let previousIndex = -1;
         let mode = 'sequential';
-        let flipped = false;
 
         function setMode(selectedMode) {
             mode = selectedMode;
             currentIndex = -1;
             alert(mode === 'sequential' ? '順番モードに切り替えました！' : 'ランダムモードに切り替えました！');
+        }
+
+        function nextQuestion() {
+            currentIndex = (currentIndex + 1) % flashcards.length;
+            document.getElementById('card-front').textContent = flashcards[currentIndex].question;
+            document.getElementById('card-back').textContent = flashcards[currentIndex].answer;
+            document.getElementById('hint').style.display = 'none';
+            document.getElementById('hint').textContent = flashcards[currentIndex].hints.join(" / ");
+        }
+
+        function toggleAnswer() {
+            document.getElementById('card').classList.toggle('flipped');
         }
 
         function toggleHint() {
