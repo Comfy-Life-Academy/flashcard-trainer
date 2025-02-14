@@ -51,6 +51,11 @@
             transform: rotateY(180deg);
             border-radius: 10px;
         }
+        .instruction {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+        }
         .button-container {
             display: flex;
             justify-content: center;
@@ -101,7 +106,9 @@
     </div>
     <div class="card-container" onclick="toggleAnswer()">
         <div class="card" id="card">
-            <div class="card-front" id="card-front">次の問題をクリックして開始</div>
+            <div class="card-front" id="card-front">次の問題をクリックして開始
+                <div class="instruction">問題をクリックで解答または回答例が表示されます</div>
+            </div>
             <div class="card-back" id="card-back">答え</div>
         </div>
     </div>
