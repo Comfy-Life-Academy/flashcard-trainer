@@ -36,6 +36,12 @@
         button:hover {
             background-color: #0056b3;
         }
+        #hint {
+            margin-top: 10px;
+            font-size: 1.1em;
+            display: none;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -46,19 +52,14 @@
     </div>
     <div id="card" onclick="toggleAnswer()">クリックして問題を表示</div>
     <button onclick="nextQuestion()">次の問題</button>
+    <button onclick="showHint()">ヒントを表示</button>
+    <p id="hint"></p>
 
     <script>
         const flashcards = [
-            { question: "コミュニケーションの基本となるスキルは？", answer: "傾聴" },
-            { question: "相手が話しやすくなるためのテクニックは？", answer: "オープンクエスチョン" },
-            { question: "人の感情を理解するために重要なスキルは？", answer: "共感力" },
-            { question: "会話の流れをスムーズにするための方法は？", answer: "相槌" },
-            { question: "相手が本音を話しやすくするために大切なことは？", answer: "安心感" },
-            { question: "相手の話を深く理解するために必要なことは？", answer: "質問力" },
-            { question: "会話のキャッチボールを成立させるために必要なことは？", answer: "レスポンスの速さ" },
-            { question: "人間関係を円滑にするための基本的な心構えは？", answer: "敬意" },
-            { question: "話を聞く際に相手の気持ちに寄り添うことを何という？", answer: "共感的傾聴" },
-            { question: "相手に安心感を与えるために重要な要素は？", answer: "アイコンタクト" }
+            { question: "コミュニケーションの基本となるスキルは？", answer: "傾聴", hints: ["相手の話をよく聞く", "共感を持って聞く"] },
+            { question: "相手が話しやすくなるためのテクニックは？", answer: "オープンクエスチョン", hints: ["はい・いいえで答えられない質問", "自由に話してもらう質問"] },
+            { question: "人の感情を理解するために重要なスキルは？", answer: "共感力", hints: ["相手の気持ちを感じ取る", "感情を受け止める"] }
         ];
 
         let currentIndex = 0;
@@ -84,6 +85,8 @@
                 currentIndex = (currentIndex + 1) % flashcards.length;
             }
             document.getElementById('card').textContent = flashcards[currentIndex].question;
+            document.getElementById('hint').style.display = 'none';
+            document.getElementById('hint').textContent = '';
             showAnswer = false;
         }
 
@@ -93,6 +96,14 @@
                     ? flashcards[currentIndex].question 
                     : flashcards[currentIndex].answer;
                 showAnswer = !showAnswer;
+            }
+        }
+
+        function showHint() {
+            if (currentIndex >= 0) {
+                const hintElement = document.getElementById('hint');
+                hintElement.textContent = flashcards[currentIndex].hints.join(" / ");
+                hintElement.style.display = 'block';
             }
         }
     </script>
