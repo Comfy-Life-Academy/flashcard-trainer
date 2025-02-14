@@ -117,7 +117,10 @@
     </div>
     <div class="card-container" onclick="toggleAnswer()">
         <div class="card" id="card">
-            <div class="card-front" id="card-front">次の問題をクリックで開始</div>
+            <div class="card-front" id="card-front">
+                <span id="initialMessage">次の問題をクリックで開始</span>
+                <div class="instruction" id="instructionMessage">問題をクリックで解答または回答例が表示されます</div>
+            </div>
             <div class="card-back" id="card-back">答え</div>
         </div>
     </div>
@@ -150,8 +153,10 @@
             currentIndex = (currentIndex + 1) % flashcards.length;
             document.getElementById('card-front').textContent = flashcards[currentIndex].question;
             document.getElementById('card-back').textContent = flashcards[currentIndex].answer;
-            document.getElementById('hint').style.display = 'none';
             document.getElementById('hint').textContent = flashcards[currentIndex].hints.join(" / ");
+            document.getElementById('hint').style.display = 'none';
+            document.getElementById('initialMessage').style.display = 'none';
+            document.getElementById('instructionMessage').style.display = 'none';
         }
 
         function toggleAnswer() {
