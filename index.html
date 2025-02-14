@@ -41,13 +41,24 @@
         .mode-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 20px;
             margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .mode-container button {
+            border: none;
+            background: none;
+            color: #007BFF;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .mode-container button:hover {
+            text-decoration: underline;
         }
         @media (max-width: 600px) {
             .mode-container {
-                flex-direction: column;
-                gap: 5px;
+                flex-direction: row;
+                gap: 10px;
             }
         }
         button {
@@ -74,7 +85,7 @@
 <body>
     <h1>問題＆答え単語帳</h1>
     <div class="mode-container">
-        <button onclick="setMode('sequential')">順番モード</button>
+        <button onclick="setMode('sequential')">順番モード</button> ｜ 
         <button onclick="setMode('random')">ランダムモード</button>
     </div>
     <div id="card-container" onclick="toggleAnswer()">
@@ -94,14 +105,14 @@
             { question: "人の感情を理解するために重要なスキルは？", answer: "共感力", hints: ["相手の気持ちを感じ取る", "感情を受け止める"] }
         ];
 
-        let currentIndex = 0;
+        let currentIndex = -1;
         let previousIndex = -1;
         let showAnswer = false;
         let mode = 'sequential'; // デフォルトは順番モード
 
         function setMode(selectedMode) {
             mode = selectedMode;
-            currentIndex = 0;
+            currentIndex = -1;
             alert(mode === 'sequential' ? '順番モードに切り替えました！' : 'ランダムモードに切り替えました！');
         }
 
@@ -128,7 +139,6 @@
                 document.getElementById('card').textContent = showAnswer 
                     ? flashcards[currentIndex].question 
                     : flashcards[currentIndex].answer;
-                document.getElementById('status').textContent = showAnswer ? '問題' : '回答例';
                 showAnswer = !showAnswer;
             }
         }
